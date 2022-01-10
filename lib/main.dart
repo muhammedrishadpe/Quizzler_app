@@ -15,7 +15,7 @@ class Quizzler extends StatelessWidget {
             padding: EdgeInsets.symmetric(
               horizontal: 10.0,
             ),
-            child: QuizPage(),
+            child: const QuizPage(),
           ),
         ),
       ),
@@ -31,6 +31,15 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  List<Icon> scoreKeeper = [];
+  List<String> questions = [
+    'You can lead a cow down stairs but not up stairs.',
+    'Approximately one quarter of human are in the feet',
+    'A slug\'s blood is green.',
+  ];
+
+  int questionNumber = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,7 +52,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go',
+                questions[questionNumber],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -57,7 +66,6 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: EdgeInsets.all(15.0),
             child: FlatButton(
-              onPressed: () {},
               textColor: Colors.white,
               color: Colors.green,
               child: Text(
@@ -67,6 +75,12 @@ class _QuizPageState extends State<QuizPage> {
                   fontSize: 20.0,
                 ),
               ),
+              onPressed: () {
+                //The user picked false.
+                setState(() {
+                  questionNumber++;
+                });
+              },
             ),
           ),
         ),
@@ -84,11 +98,26 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
+                setState(() {
+                  questionNumber--;
+                });
               },
             ),
           ),
+        ),
+        //TODO: add a row here as your score keeper4
+        Row(
+          children: scoreKeeper,
         ),
       ],
     );
   }
 }
+
+
+/* 
+questions1: false,
+questions2: ,true,
+questions3:,true,
+
+*/
